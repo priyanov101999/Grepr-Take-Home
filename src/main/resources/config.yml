@@ -1,0 +1,37 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+
+dbUrl: "jdbc:postgresql://localhost:5433/app"
+dbUser: "postgres"
+dbPassword: "postgres"
+workerCount: 4
+queueSize: 200
+
+rateLimitPerMinute: 30
+maxPendingPerUser: 20
+maxRunningPerUser: 2
+maxRunningGlobal: 8
+
+maxSqlChars: 10000
+statementTimeoutMs: 30000
+fetchSize: 200
+maxRows: 1000000
+maxBytes: 200000000
+
+resultsDir: "results"
+logging:
+  level: INFO
+  loggers:
+    org.example: INFO
+    org.eclipse.jetty: INFO
+  appenders:
+    - type: console
+      threshold: DEBUG
+    - type: file
+      currentLogFilename: ./logs/application.log
+      archivedLogFilenamePattern: ./logs/application-%d.log.gz
+      archivedFileCount: 5
+      threshold: DEBUG
+
